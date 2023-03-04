@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+</head>
+<body>
+    <center>
+		<h1>Registration Form</h1>
+		<form method="POST" action="display.php">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td>:</td>
+					<td><input type="text" name="name"></td>
+				</tr>
+				<tr>
+					<td>Username</td>
+					<td>:</td>
+					<td><input type="text" name="userName"></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td>:</td>
+					<td><input type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td>Re-enter Password</td>
+					<td>:</td>
+					<td><input type="password" name="re-EnterPassword"></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td>:</td>
+					<td><textarea name="address" rows="4" cols="20"></textarea></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td>:</td>
+					<td>
+						<input type="radio" name="gender" value="male">Male
+						<input type="radio" name="gender" value="female">Female
+					</td>
+				</tr>
+				<tr>
+					<td>District Name</td>
+					<td>:</td>
+					<td>
+						<select name="districtName">
+							<option value="Trivandrum">Trivandrum</option>
+							<option value="Kollam">Kollam</option>
+							<option value="Pathanamthitta">Pathanamthitta</option>
+							<option value="Alappuzha">Alappuzha</option>
+							<option value="Kottayam">Kottayam</option>
+							<option value="Idukki">Idukki</option>
+							<option value="Ernakulam">Ernakulam</option>
+							<option value="Thrissur">Thrissur</option>
+							<option value="Palakkad">Palakkad</option>
+							<option value="Malappuram">Malappuram</option>
+							<option value="Kozhikode">Kozhikode</option>
+							<option value="Wayanad">Wayanad</option>
+							<option value="Kannur">Kannur</option>
+							<option value="Kasargod">Kasargod</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Events</td>
+					<td>:</td>
+					<td>
+						<input type="checkbox" name="events[]" value="Wedding">Wedding
+						<input type="checkbox" name="events[]" value="Corporate">Corporate
+						<input type="checkbox" name="events[]" value="Social">Social
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><input type="submit" name="register" value="Register"></td>
+				</tr>
+			</table>
+        </form>
+        </center>
+</body>
+</html>

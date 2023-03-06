@@ -29,6 +29,8 @@ public class TravelClassDAO {
             e.printStackTrace();
         }
 
+        con.close();
+
         return travelClassList;
     }
 
@@ -43,5 +45,8 @@ public class TravelClassDAO {
         ps.setString(1, description);
         ps.setString(2, name);
         ps.executeUpdate();
+
+        ps.close();
+        con.close();
     }
 }

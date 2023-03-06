@@ -45,7 +45,6 @@ public class User implements Comparable<User> {
         return Objects.hash(username);
     }
 
-    @Override
     public int compareTo(User o) {
         return this.username.compareTo(o.getUsername());
     }

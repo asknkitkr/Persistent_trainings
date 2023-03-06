@@ -1,6 +1,6 @@
 package Class_Packaging.Q2;
 
-class Customer implements Cloneable {
+public class Customer implements Cloneable {
     String name;
     String id;
     String country;

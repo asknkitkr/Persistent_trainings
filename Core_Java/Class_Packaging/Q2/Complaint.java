@@ -1,4 +1,4 @@
-class Complaint {
+public class Complaint {
     String complaint;
     Customer customer;
 

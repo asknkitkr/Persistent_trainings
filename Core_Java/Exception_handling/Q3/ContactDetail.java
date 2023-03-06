@@ -7,6 +7,14 @@ public class ContactDetail {
     private String email;
     private String address;
 
+    public ContactDetail() {
+        this.mobile = "";
+        this.alternateMobile = "";
+        this.landLine = "";
+        this.email = "";
+        this.address = "";
+    }
+
     public ContactDetail(String mobile, String alternateMobile, String landLine, String email, String address) {
         this.mobile = mobile;
         this.alternateMobile = alternateMobile;
@@ -53,9 +61,6 @@ public class ContactDetail {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public ContactDetail() {
     }
 
     @Override

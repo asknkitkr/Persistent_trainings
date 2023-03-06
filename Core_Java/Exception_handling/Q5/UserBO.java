@@ -21,7 +21,7 @@ public class UserBO {
         }
 
         if (len < 10 || len > 20 || !hasDigit || !hasLetter || !hasSpecialChar) {
-            throw new WeakPasswordException("Your password is weak");
+            throw new WeakPasswordException();
         }
     }
 }

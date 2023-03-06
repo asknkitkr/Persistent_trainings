@@ -19,7 +19,7 @@ public class Main {
             UserBO.validate(u);
             System.out.println(u);
         } catch (WeakPasswordException e) {
-            System.out.println(e.getMessage());
+            System.out.println("WeakPasswordException: " + e.getMessage());
         }
     }
 }

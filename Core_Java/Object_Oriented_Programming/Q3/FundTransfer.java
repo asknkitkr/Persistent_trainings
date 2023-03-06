@@ -25,12 +25,7 @@ public abstract class FundTransfer {
         this.balance = balance;
     }
 
-    public abstract boolean transfer(Double transferAmount);
+    public abstract Boolean transfer(Double transferAmount);
 
-    public boolean validate(Double transferAmount) {
-        if (accountNumber.length() != 10 || transferAmount < 0 || transferAmount > balance) {
-            return false;
-        }
-        return true;
-    }
+    public abstract Boolean validate(Double transferAmount);
 }

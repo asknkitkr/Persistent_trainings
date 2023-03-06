@@ -7,18 +7,20 @@ public class IMPSTransfer extends FundTransfer {
     }
 
     @Override
-    public boolean transfer(Double transferAmount) {
-        if (validate(transferAmount)) {
-            Double serviceCharge = transferAmount * 0.02;
-            if (transferAmount + serviceCharge <= getBalance()) {
-                setBalance(getBalance() - transferAmount - serviceCharge);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
+    public Boolean validate(Double transferAmount) {
+        if (this.getAccountNumber().length() == 10 && transferAmount > 0 && transferAmount < this.getBalance()) {
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public Boolean transfer(Double transferAmount) {
+        if (this.validate(transferAmount)) {
+            this.setBalance(this.getBalance() - transferAmount - transferAmount * 0.02);
+            return true;
+        }
+        return false;
     }
 
 }

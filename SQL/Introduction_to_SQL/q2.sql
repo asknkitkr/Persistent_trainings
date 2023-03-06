@@ -1,0 +1,1 @@
+ALTER TABLE building RENAME COLUMN email_address TO email;

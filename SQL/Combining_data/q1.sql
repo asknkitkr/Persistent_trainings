@@ -1,0 +1,1 @@
+SELECT * FROM bill b JOIN meter m ON b.meter_id = m.id ORDER BY m.meter_number;

@@ -1,0 +1,1 @@
+SELECT rate FROM slab WHERE from_unit=2001 AND to_unit=4500;

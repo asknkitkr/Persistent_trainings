@@ -1,0 +1,1 @@
+SELECT AVG(total_units) as average_units_of_electricity FROM electricity_reading;

@@ -1,0 +1,1 @@
+ALTER TABLE building ADD description VARCHAR(255) NOT NULL;

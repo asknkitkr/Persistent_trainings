@@ -1,0 +1,1 @@
+select total_units,payable_amount from bill where meter_id=(select id from meter where meter_number='SG934826')

@@ -4,9 +4,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Students</title>
+
+    <script>
+        function display() {
+            var xmlHttp = new XMLHttpRequest();
+
+            xmlHttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                    var myObj = JSONParse(this.responseText);
+                    var table = document.getElementById("studentTable");
+
+                    for(var i = 0; i < myObj.length; i++) {
+                        var row = table.insertRow(i+1);
+                        var idCell = row.insertCell(0);
+                        var nameCell = row.insertCell(1);
+                        var mobileCell = row.insertCell(2);
+                        var emailCell = row.insertCell(3);
+                        var addressCell = row.insertCell(4);
+                        var dojCell = row.insertCell(5);
+                        var departmentCell = row.insertCell(6);
+                        var markCell = row.insertCell(7);
+
+                        idCell.appenChild(document.createTextNode(myObj[i].id));
+                        nameCell.appenChild(document.createTextNode(myObj[i].name));
+                        mobileCell.appenChild(document.createTextNode(myObj[i].mobile));
+                        emailCell.appenChild(document.createTextNode(myObj[i].email));
+                        addressCell.appenChild(document.createTextNode(myObj[i].address));
+                        dojCell.appenChild(document.createTextNode(myObj[i].doj));
+                        departmentCell.appenChild(document.createTextNode(myObj[i].department));
+                        markCell.appenChild(document.createTextNode(myObj[i].mark));
+                    }
+                }
+            };
+            xmlHttp.open("GET", "Students.json", true);
+            xmlHttp.send();
+        }
+    </script>
+
 </head>
-<body>
-    
+<body onload="display()">
+    <h1>Student Details</h1>
+    <table id="studentTable">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Mobile Number</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>DOJ</th>
+            <th>Department</th>
+            <th>Mark</th>
+        </tr>
+    </table>
 </body>
 </html>

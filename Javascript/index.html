@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id='opener'>First Paragraph!</p>
+    <p>Second Paragraph!</p>
+    <p class='closer'>Third Paragraph!</p>
+    <p class='closer'>Fourth Paragraph!</p>
+    <div class='closer'>This is div with class closer!</div>
+    <div>This is simple div!</div>
+    <button id="btnChange">Change!</button>
+
+    <script>
+        
+        document.getElementById('btnChange').onclick = function() {
+            var element=document.getElementById("opener")
+              element.style.background= "yellow";
+                element.style.color="red";
+            }
+    </script>
+</body>
+</html>

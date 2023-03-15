@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <style>
+            #success {
+                color: #00ff00;
+            }
+
+            #phoneNumber_Warning, #cardNumber_Warning {
+                color: #ff0000;
+            }
+        </style>
+        <script type="text/javascript">
+             function validate()
+             {
+                  checkPhoneNumber();
+                  checkCardNumber();
+
+                  if(document.getElementById('phoneNumber_Warning').innerHTML === "" && document.getElementById('cardNumber_Warning').innerHTML === "") {
+                    document.getElementById("success").innerHTML = "Details stored in database";
+                  }
+             }
+             function checkPhoneNumber()
+             {
+                var phoneNumber = document.getElementById('phoneNumber').value;
+                var warning = document.getElementById("phoneNumber_Warning");
+
+                if(phoneNumber === "") {
+                    warning.innerHTML = "Phone number is required";
+                } else if(isNaN(phoneNumber)) {
+                    warning.innerHTML = "Phone number must contains only digits";
+                } else if(phoneNumber.length != 10) {
+                    warning.innerHTML = "Phone Number must be 10 digit";
+                } else {
+                    warning.innerHTML = "";
+                }
+             }
+             function checkCardNumber()
+             {
+                var cardNumber = document.getElementById('cardNumber').value;
+                var warning = document.getElementById("cardNumber_Warning");
+
+                if(isNaN(cardNumber)) {
+                    warning.innerHTML = "Card number must contains only digits";
+                } else if(cardNumber.length != 16) {
+                    warning.innerHTML = "Card Number must be 16 digits";
+                } else {
+                    warning.innerHTML = "";
+                }
+             }
+    	 </script>
+	</head>
+	<body>
+        <h3>Phone Number & Card Validation</h3>
+        Enter your Phone Number:<input type="text" id="phoneNumber" onkeydown="checkPhoneNumber()">
+        <div id="phoneNumber_Warning"></div></br>
+        
+        Enter your Card Number:<input type="text" id="cardNumber" onkeydown="checkCardNumber()">
+        <div id="cardNumber_Warning"></div></br>
+        <button type="button" id="validate" onclick="validate()">Validate</button>
+       <div id="success"></div>
+	</body>
+</html>
+

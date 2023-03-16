@@ -1,62 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students</title>
-
-    <script>
-        function display() {
-            var xmlHttp = new XMLHttpRequest();
-
-            xmlHttp.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200) {
-                    var myObj = JSONParse(this.responseText);
-                    var table = document.getElementById("studentTable");
-
-                    for(var i = 0; i < myObj.length; i++) {
-                        var row = table.insertRow(i+1);
-                        var idCell = row.insertCell(0);
-                        var nameCell = row.insertCell(1);
-                        var mobileCell = row.insertCell(2);
-                        var emailCell = row.insertCell(3);
-                        var addressCell = row.insertCell(4);
-                        var dojCell = row.insertCell(5);
-                        var departmentCell = row.insertCell(6);
-                        var markCell = row.insertCell(7);
-
-                        idCell.appenChild(document.createTextNode(myObj[i].id));
-                        nameCell.appenChild(document.createTextNode(myObj[i].name));
-                        mobileCell.appenChild(document.createTextNode(myObj[i].mobile));
-                        emailCell.appenChild(document.createTextNode(myObj[i].email));
-                        addressCell.appenChild(document.createTextNode(myObj[i].address));
-                        dojCell.appenChild(document.createTextNode(myObj[i].doj));
-                        departmentCell.appenChild(document.createTextNode(myObj[i].department));
-                        markCell.appenChild(document.createTextNode(myObj[i].mark));
-                    }
-                }
-            };
-            xmlHttp.open("GET", "Students.json", true);
-            xmlHttp.send();
-        }
-    </script>
-
+    <title>Student Details</title>
 </head>
 <body onload="display()">
     <h2>Student Details</h2>
-    <table id="studentTable">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>DOB</th>
-            <th>Mobile Number</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>DOJ</th>
-            <th>Department</th>
-            <th>Mark</th>
-        </tr>
+    <table id="studentTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>DOB</th>
+                <th>Mobile Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>DOJ</th>
+                <th>Department</th>
+                <th>Mark</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
     </table>
-</body>
-</html>
+    <br>
+    <div>
+        <label for="studentId">Student Id:</label>
+        <input type="text" id="studentId">
+        <br><br>
+        <label for="fieldType">Field Type:</label>
+        <select id="fieldType">
+            <option value="name">Name</option>
+            <option value="DOB">DOB</option>
+            <option value="mobileNumber">Mobile Number</option>
+            <option value="email">Email</option>
+            <option value="address">Address</option>
+            <option value="DOJ">DOJ</option>
+            <option value="department">Department</option>
+            <option value="mark">Mark</option>
+        </select>
+        <br><br>
+        <label for="fieldValue">Field Value:</label>
+        <input type="text" id="fieldValue">
+        <br><br>
+        <button onclick="update()">Update</button>
+    </div>
+
+    <script>
+      // Retrieve table data from JSON
+        function display() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            var students = JSON.parse(this.responseText);
+            var table = document.getElementById("studentsTable");
+            var tbody = table.getElementsByTagName("tbody")[0];
+
+            for (var i = 0; i < students.length; i++) {
+                var student = students[i];
+                var row = document.createElement("tr");
+                var id = document.createElement("td");
+                id.appendChild(document.createTextNode(student.id));
+                row.appendChild(id);
+                var name = document.createElement("td");
+                name.appendChild(document.createTextNode(student.name));
+                row.appendChild(name);
+                var dob = document.createElement("td");
+                dob.appendChild(document.createTextNode(student.DOB));
+                row.appendChild(dob);
+                var mobileNumber = document.createElement("td");
+                mobileNumber.appendChild(document.createTextNode(student.mobileNumber));
+                row.appendChild(mobileNumber);
+                var email = document.createElement("td");
+                email.appendChild(document.createTextNode(student.email));
+                row.appendChild(email);
+                var address = document.createElement("td");
+                address.appendChild(document.createTextNode(student.address));
+                row.appendChild(address);
+                var doj = document.createElement("td");
+                doj.appendChild(document.createTextNode(student.DOJ));
+                row.appendChild(doj);
+                var department = document.createElement("td");
+                department.appendChild(document.createTextNode(student.department));
+                row.appendChild(department);
+                var mark = document.createElement("td");
+                mark.appendChild(document.createTextNode(student.mark));
+                row.appendChild(mark);
+                tbody.appendChild(row);
+            }
+            }
+        };
+        xmlhttp.open("GET", "Students.json", true);
+        xmlhttp.send();
+        }
+
+        // Update student details
+        function update() {
+        var id = document.getElementById("id").value;
+        var fieldType = document.getElementById("fieldType").value;
+        var fieldValue = document.getElementById("fieldValue").value;
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            var students = JSON.parse(this.responseText);
+            for (var i = 0; i < students.length; i++) {
+                if (students[i].id == id) {
+                students[i][fieldType] = fieldValue;
+                break;
+                }
+            }
+
+            var updatedStudents = JSON.stringify(students);
+            xmlhttp.open("POST", "Students.json", true);
+            xmlhttp.setRequestHeader("Content-type", "application/json");
+            xmlhttp.send(updatedStudents);
+            }
+        };
+        xmlhttp.open("GET", "Students.json", true);
+        xmlhttp.send();
+        }
+  
+    </script>
+
+    </body>
+    </html>

@@ -7,7 +7,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter your account number:");
-        String accountNumber = sc.next();
+        String accountNumber = sc.nextLine();
 
         System.out.println("Enter the balance of the account:");
         Double balance = sc.nextDouble();

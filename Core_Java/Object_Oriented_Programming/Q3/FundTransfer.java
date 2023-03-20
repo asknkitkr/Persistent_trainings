@@ -1,8 +1,8 @@
 package Object_Oriented_Programming.Q3;
 
 public abstract class FundTransfer {
-    public String accountNumber;
-    public Double balance;
+    private String accountNumber;
+    private Double balance;
 
     public FundTransfer(String accountNumber, Double balance) {
         this.accountNumber = accountNumber;
@@ -25,7 +25,12 @@ public abstract class FundTransfer {
         this.balance = balance;
     }
 
-    public abstract Boolean transfer(Double transferAmount);
+    public Boolean validate(Double transferAmount) {
+        if (this.getAccountNumber().length() == 10 && transferAmount > 0 && transferAmount < this.getBalance()) {
+            return true;
+        }
+        return false;
+    }
 
-    public abstract Boolean validate(Double transferAmount);
+    public abstract Boolean transfer(Double transferAmount);
 }

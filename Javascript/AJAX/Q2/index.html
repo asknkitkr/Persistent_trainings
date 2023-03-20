@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book List</title>
+	<link rel="stylesheet" href="style.css">
+	<script>
+		function loadJson() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var data = JSON.parse(this.responseText);
+					var table = document.createElement("table");
+					table.setAttribute("id", "bookTable");
+					var row = table.insertRow(-1);
+					var headers = ["Book Name", "Author Name", "Price"];
+					for (var i = 0; i < headers.length; i++) {
+						var header = document.createElement("th");
+						var text = document.createTextNode(headers[i]);
+						header.appendChild(text);
+						row.appendChild(header);
+					}
+					for (var i = 0; i < data.length; i++) {
+						row = table.insertRow(-1);
+						var bookname = row.insertCell(0);
+						var authorname = row.insertCell(1);
+						var price = row.insertCell(2);
+						bookname.innerHTML = data[i].bookname;
+						authorname.innerHTML = data[i].authorname;
+						price.innerHTML = data[i].price;
+					}
+					var booklist = document.getElementById("booklist");
+					booklist.appendChild(table);
+				}
+			};
+			xhr.open("GET", "booklist.json", true);
+			xhr.send();
+		}
+		function tojson() {
+			var bookname = document.getElementById("bookname").value;
+			var authorname = document.getElementById("authorname").value;
+			var price = document.getElementById("price").value;
+			var book = {
+				"bookname": bookname,
+				"authorname": authorname,
+				"price": price
+			};
+			var jsonData = document.getElementById("jsonData");
+			jsonData.innerHTML = JSON.stringify(book);
+		}
+	</script>
+</head>
+<body onload="loadJson()">
+	<h1>Book List</h1>
+	<div id="booklist"></div>
+	<div class="formData">
+        <form>
+            <label for="bookname">Book Name:</label>
+            <input type="text" id="name" class="fields"><br><br>
+            <label for="authorname">Author Name:</label>
+            <input type="text" id="price" class="fields"><br><br>
+            <label for="price">Price:</label>
+            <input type="text" id="availableQuantity" class="fields"><br><br>
+            <button type="button" id="convertToJSON" onclick="tojson()">Convert to JSON</button>
+        </form>
+    </div>
+	<div id="jsonData"></div>
+</body>
+</html>
+
+

@@ -11,6 +11,7 @@ public class CityCount extends Thread {
     public CityCount(String city, ArrayList<User> userList) {
         this.city = city;
         this.userList = userList;
+        this.count = 0;
     }
 
     public String getCity() {

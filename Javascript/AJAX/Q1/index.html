@@ -6,22 +6,28 @@
 <body onload="display()">
     <h2>Student Details</h2>
     <table id="studentTable" border="1">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>DOB</th>
-            <th>Mobile Number</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>DOJ</th>
-            <th>Department</th>
-            <th>Mark</th>
-        </tr>
+        <thead>
+
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>DOB</th>
+                <th>Mobile Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>DOJ</th>
+                <th>Department</th>
+                <th>Mark</th>
+            </tr>
+        </thead>
+        <tbody id="studentBody">
+
+        </tbody>
     </table>
     <br>
     <div>
-        <label for="studentId">Student Id:</label>
-        <input type="text" id="studentId">
+        <label for="id">Student Id:</label>
+        <input type="text" id="id">
         <br><br>
         <label for="fieldType">Field Type:</label>
         <select id="fieldType">
@@ -38,7 +44,7 @@
         <label for="fieldValue">Field Value:</label>
         <input type="text" id="fieldValue">
         <br><br>
-        <button onclick="update()">Update</button>
+        <button onclick="update()" id="update">Update</button>
     </div>
 
     <script>
@@ -49,9 +55,9 @@
                 if(this.status === 200) {
                     var students = JSON.parse(this.responseText);
                     console.log(students);
-                    var table = document.getElementById("studentTable");
+                    var table = document.getElementById("studentBody");
 
-                    for(var s in students) {
+                    for(var s = 0; s < students.length; s++) {
                         var tr = document.createElement("tr");
 
                         var id = document.createElement("td");
@@ -106,6 +112,66 @@
             }
             xhr.send();
         }
+
+        function update() {
+  // retrieve input values from form
+  var studentId = document.getElementById("studentId").value;
+  var fieldType = document.getElementById("fieldType").value;
+  var fieldValue = document.getElementById("fieldValue").value;
+
+  // create new XMLHttpRequest object
+  var xhr = new XMLHttpRequest();
+
+  // configure PUT request to update student data
+  xhr.open('PUT', 'Students.json', true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      console.log(xhr.responseText);
+      // update table with new data
+      var table = document.getElementById("studentTable");
+      var row = table.rows[studentId];
+      var cellIndex = 0;
+      switch (fieldType) {
+        case "name":
+          cellIndex = 1;
+          break;
+        case "DOB":
+          cellIndex = 2;
+          break;
+        case "mobileNumber":
+          cellIndex = 3;
+          break;
+        case "email":
+          cellIndex = 4;
+          break;
+        case "address":
+          cellIndex = 5;
+          break;
+        case "DOJ":
+          cellIndex = 6;
+          break;
+        case "department":
+          cellIndex = 7;
+          break;
+        case "mark":
+          cellIndex = 8;
+          break;
+      }
+      row.cells[cellIndex].innerHTML = fieldValue;
+    } else {
+      console.error(xhr.statusText);
+    }
+  };
+  xhr.onerror = function() {
+    console.error(xhr.statusText);
+  };
+
+  // send PUT request with updated data
+  var data = JSON.stringify({ id: studentId, [fieldType]: fieldValue });
+  xhr.send(data);
+}
+
     </script>
 
     </body>

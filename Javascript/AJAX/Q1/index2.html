@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+</head>
+<body onload="display()">
+    <h2>Student Details</h2>
+    <table border="1" id="stable">
+               
+    </table>
+    <br/>
+    <label for="id">
+        Student Id:
+    </label>
+    <input type="text" id="id" />
+    <br/><br/>
+    <label for="fieldType">
+        Field Type: 
+    </label>
+    <select id="fieldType">
+        <option value="name">Name</option>
+        <option value="DOB">DOB</option>
+        <option value="mobileNumber">Mobile Number</option>
+        <option value="email">Email</option>
+        <option value="address">Address</option>
+        <option value="DOJ">DOJ</option>
+        <option value="department">Department</option>
+        <option value="mark">Mark</option>
+    </select>
+    <br/><br/>
+    <label for="fieldValue">
+        Field Value:
+    </label>
+    <input type="text" id="fieldValue" />
+    <br/><br/>
+    <button id="update" onclick="update()">UPDATE</button>
+
+    <script>
+        function display() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'Students.json', true);
+            xhr.onload = function() {
+                if(this.status === 200) {
+                    var students = JSON.parse(this.responseText);
+                    console.log(students);
+
+                    var table = document.getElementById("stable");
+
+                    var tr = document.createElement("tr");
+
+                    var a1 = document.createElement("th");
+                    var b1 = document.createTextNode("Id");
+                    a1.appendChild(b1);
+
+                    var a2 = document.createElement("th");
+                    var b2 = document.createTextNode("Name");
+                    a2.appendChild(b2);
+
+                    var a3 = document.createElement("th");
+                    var b3 = document.createTextNode("DOB");
+                    a3.appendChild(b3);
+
+                    var a4 = document.createElement("th");
+                    var b4 = document.createTextNode("Mobile Number");
+                    a4.appendChild(b4);
+
+                    var a5 = document.createElement("th");
+                    var b5 = document.createTextNode("Email");
+                    a5.appendChild(b5);
+
+                    var a6 = document.createElement("th");
+                    var b6 = document.createTextNode("Address");
+                    a6.appendChild(b6);
+
+                    var a7 = document.createElement("th");
+                    var b7 = document.createTextNode("DOJ");
+                    a7.appendChild(b7);
+
+                    var a8 = document.createElement("th");
+                    var b8 = document.createTextNode("Department");
+                    a8.appendChild(b8);
+
+                    var a9 = document.createElement("th");
+                    var b9 = document.createTextNode("Mark");
+                    a9.appendChild(b9);
+
+                    tr.appendChild(a1);
+                    tr.appendChild(a2);
+                    tr.appendChild(a3);
+                    tr.appendChild(a4);
+                    tr.appendChild(a5);
+                    tr.appendChild(a6);
+                    tr.appendChild(a7);
+                    tr.appendChild(a8);
+                    tr.appendChild(a9);
+
+                    table.appendChild(tr);
+
+                    for(var i in students) {
+                        console.log(students[i]);
+
+                        var tr = document.createElement("tr");
+
+                        var id = document.createElement("td");
+                        var i1 = document.createTextNode(parseInt(i)+1);
+                        id.appendChild(i1);
+
+                        var name = document.createElement("td");
+                        var i2 = document.createTextNode(students[i].name);
+                        name.appendChild(i2);
+
+                        var dob = document.createElement("td");
+                        var i3 = document.createTextNode(students[i].DOB);
+                        dob.appendChild(i3);
+
+                        var mobile = document.createElement("td");
+                        var i4 = document.createTextNode(students[i].mobileNumber);
+                        mobile.appendChild(i4);
+
+                        var email = document.createElement("td");
+                        var i5 = document.createTextNode(students[i].email);
+                        email.appendChild(i5);
+
+                        var address = document.createElement("td");
+                        var i6 = document.createTextNode(students[i].address);
+                        address.appendChild(i6);
+
+                        var doj = document.createElement("td");
+                        var i7 = document.createTextNode(students[i].DOJ);
+                        doj.appendChild(i7);
+
+                        var department = document.createElement("td");
+                        var i8 = document.createTextNode(students[i].department);
+                        department.appendChild(i8);
+
+                        var mark = document.createElement("td");
+                        var i9 = document.createTextNode(students[i].mark);
+                        mark.appendChild(i9);
+
+                        tr.appendChild(id);
+                        tr.appendChild(name);
+                        tr.appendChild(dob);
+                        tr.appendChild(mobile);
+                        tr.appendChild(email);
+                        tr.appendChild(address);
+                        tr.appendChild(doj);
+                        tr.appendChild(department);
+                        tr.appendChild(mark);
+
+                        table.appendChild(tr);
+                    }
+                }
+            }
+            xhr.send();
+        }
+
+        function update() {
+    var id = document.getElementById("id").value;
+    var fieldType = document.getElementById("fieldType").value;
+    var fieldValue = document.getElementById("fieldValue").value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'Students.json', true);
+    xhr.onload = function() {
+        if (this.status === 200) {
+            var students = JSON.parse(this.responseText);
+            console.log(students);
+
+            // Find the student object in the JSON data using the student id
+            var student = students.find(function(s) {
+                return s.id === id;
+            });
+
+            // Update the student object with the new value based on the field type
+            switch (fieldType) {
+                case "name":
+                    student.name = fieldValue;
+                    break;
+                case "DOB":
+                    student.DOB = fieldValue;
+                    break;
+                case "mobileNumber":
+                    student.mobileNumber = fieldValue;
+                    break;
+                case "email":
+                    student.email = fieldValue;
+                    break;
+                case "address":
+                    student.address = fieldValue;
+                    break;
+                case "DOJ":
+                    student.DOJ = fieldValue;
+                    break;
+                case "department":
+                    student.department = fieldValue;
+                    break;
+                case "mark":
+                    student.mark = fieldValue;
+                    break;
+            }
+
+            // Save the updated JSON data back to the file
+            xhr.open('POST', 'Students.json', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.send(JSON.stringify(students));
+
+            // Update the table with the new student details
+            var table = document.getElementById("stable");
+            var rows = table.getElementsByTagName("tr");
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var cols = row.getElementsByTagName("td");
+                if (cols[0].innerText === id) {
+                    cols[1].innerText = student.name;
+                    cols[2].innerText = student.DOB;
+                    cols[3].innerText = student.mobileNumber;
+                    cols[4].innerText = student.email;
+                    cols[5].innerText = student.address;
+                    cols[6].innerText = student.DOJ;
+                    cols[7].innerText = student.department;
+                    cols[8].innerText = student.mark;
+                    break;
+                }
+            }
+        }
+    };
+    xhr.send();
+}
+
+    </script>
+</body>
+</html>

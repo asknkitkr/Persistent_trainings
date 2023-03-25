@@ -6,6 +6,7 @@ public class Main {
         UserDAO dao = new UserDAO();
         ArrayList<User> userList = dao.listUsers();
 
+        System.out.println("Before the Delete");
         System.out.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %s\n", "Id", "Name", "Email", "Password", "Age",
                 "Role", "CreatedDate", "Status");
         for (User user : userList) {

@@ -1,45 +1,74 @@
-import java.util.ArrayList;
-import java.util.Date;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDAO {
-
   public ArrayList<User> listUsers() throws Exception {
     ArrayList<User> userList = new ArrayList<User>();
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
 
-    Connection con = DBConnection.getConnection();
+    try {
+      connection = DBConnection.getConnection();
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery("SELECT * FROM \"user\"");
 
-    Statement st = con.createStatement();
-    ResultSet rs = st.executeQuery("SELECT * FROM user");
+      while (resultSet.next()) {
+        User user = new User();
+        user.setId(resultSet.getInt("id"));
+        user.setName(resultSet.getString("name"));
+        user.setEmail(resultSet.getString("email"));
+        user.setPassword(resultSet.getString("password"));
+        user.setAge(resultSet.getInt("age"));
+        user.setRole(resultSet.getString("role"));
+        user.setCreatedDate(resultSet.getDate("created_date"));
+        user.setStatus(resultSet.getString("status"));
 
-    while (rs.next()) {
-      Integer id = rs.getInt("id");
-      String name = rs.getString("name");
-      String email = rs.getString("email");
-      String password = rs.getString("password");
-      Integer age = rs.getInt("age");
-      String role = rs.getString("role");
-      Date dateCreated = rs.getDate("created_date");
-      String status = rs.getString("status");
-
-      User user = new User(id, name, email, password, age, role, dateCreated, status);
-      userList.add(user);
+        userList.add(user);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (resultSet != null) {
+          resultSet.close();
+        }
+        if (statement != null) {
+          statement.close();
+        }
+        if (connection != null) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
-
-    rs.close();
-    st.close();
-    con.close();
 
     return userList;
   }
 
   public void deleteUser(Integer id) throws Exception {
-    Connection con = DBConnection.getConnection();
-    PreparedStatement ps = con.prepareStatement("DELETE FROM user WHERE id=?");
-    ps.setInt(1, id);
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
 
-    ps.close();
-    con.close();
+    try {
+      connection = DBConnection.getConnection();
+      preparedStatement = connection.prepareStatement("DELETE FROM \"user\" WHERE id=?");
+      preparedStatement.setInt(1, id);
+      preparedStatement.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (preparedStatement != null) {
+          preparedStatement.close();
+        }
+        if (connection != null) {
+          connection.close();
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+    }
   }
-
 }

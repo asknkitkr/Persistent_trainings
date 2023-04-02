@@ -2,35 +2,39 @@ package Streams_and_Files.Q2;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
+        ArrayList<User> userList = new ArrayList<>();
 
         System.out.println("Enter the number of users:");
         int n = sc.nextInt();
 
-        ArrayList<User> userList = new ArrayList<>();
-        for (int i = 1; i <= n; i++) {
-            System.out.println("Enter the details of user " + i + ":");
-            sc.nextLine();
+        sc.nextLine();
+
+        User user = null;
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the details of user " + (i + 1) + ":");
             String line = sc.nextLine();
 
             String[] fields = line.split(",");
-            User user = new User(fields[0], fields[1], fields[2], fields[3]);
+            user = new User();
+            user.setName(fields[0]);
+            user.setMobileNumber(fields[1]);
+            user.setUsername(fields[2]);
+            user.setPassword(fields[3]);
+
             userList.add(user);
+            user = null;
         }
 
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("output.csv"));
-            UserBO.writeFile(userList, bw);
-            System.out.println("Data has been written to output.csv");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileWriter fw = new FileWriter("output.csv");
+        BufferedWriter bw = new BufferedWriter(fw);
+        UserBO.writeFile(userList, bw);
 
         sc.close();
     }

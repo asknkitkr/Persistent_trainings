@@ -1,19 +1,18 @@
 package Streams_and_Files.Q2;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserBO {
-    public static void writeFile(ArrayList<User> userList, BufferedWriter bw) {
-        try {
-            bw.write("Name,Mobile Number,Username,Password\n");
-            for (User user : userList) {
-                bw.write(user.getName() + "," + user.getMobileNumber() + "," +
-                        user.getUsername() + "," + user.getPassword() + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void writeFile(ArrayList<User> userList, BufferedWriter bw) throws Exception {
+        for (User u : userList) {
+            bw.write(u.getName() + ",");
+            bw.write(u.getMobileNumber() + ",");
+            bw.write(u.getUsername() + ",");
+            bw.write(u.getPassword());
+            bw.write("\n");
         }
+        bw.flush();
+        bw.close();
     }
 }

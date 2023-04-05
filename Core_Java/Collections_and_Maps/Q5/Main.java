@@ -12,7 +12,12 @@ public class Main {
         for (int i = 0; i < n; i++) {
             System.out.println("Enter the user " + (i + 1) + " detail in csv format");
             String[] details = sc.nextLine().split(",");
-            userList.add(new User(details[0], details[1], details[2], details[3]));
+            userList.addAllUsers(new User(details[0], details[1], details[2], details[3]));
+        }
+
+        System.out.printf("%-20s%-20s%-20s%-20s\n", "Name", "Contact Number", "Username", "Email");
+        for (User user : userList) {
+            user.display();
         }
 
         System.out.println("Enter the range to be removed from array list");

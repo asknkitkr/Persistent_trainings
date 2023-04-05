@@ -1,6 +1,7 @@
 package Core_Java.Collections_and_Maps.Q5;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class UserBO extends ArrayList<User> {
@@ -14,13 +15,10 @@ public class UserBO extends ArrayList<User> {
     }
 
     public void removeUser(int n1, int n2) {
-        if (n1 < 0 || n2 >= this.size() || n1 > n2) {
-            throw new IllegalArgumentException("Invalid index range");
-        }
         this.removeRange(n1, n2 + 1);
     }
 
-    public void addAllUsers(List<User> users) {
-        this.addAll(users);
+    public void addAllUsers(User user) {
+        this.addAll((Collection<? extends User>) user);
     }
 }

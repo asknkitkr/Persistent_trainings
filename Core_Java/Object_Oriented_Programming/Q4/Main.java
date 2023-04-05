@@ -16,7 +16,7 @@ public class Main {
         int choice = sc.nextInt();
         sc.nextLine();
 
-        Event event;
+        Event event = null;
         if (choice == 1) {
             System.out.println("Enter the details of exhibition:");
             String[] eventDetails = sc.nextLine().split(",");
@@ -42,7 +42,7 @@ public class Main {
         System.out.println("Enter the ending date of the event:");
         Date endDate = df.parse(sc.nextLine());
         long diff = endDate.getTime() - startDate.getTime();
-        Double totalCost = (diff / (1000 * 60 * 60 * 24) + 1) * event.getCostPerDay();
+        Double totalCost = (diff / (1000 * 60 * 60 * 24)) * event.getCostPerDay();
         Double gst;
         if (choice == 1) {
             gst = 0.05 * totalCost;

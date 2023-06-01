@@ -6,7 +6,7 @@ public class User {
     private String city;
     private String state;
 
-    public User(String name, String mobileNumber, String city, String state) {
+    User(String name, String mobileNumber, String city, String state) {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.city = city;

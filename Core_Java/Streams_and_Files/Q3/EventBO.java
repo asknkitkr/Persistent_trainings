@@ -19,6 +19,7 @@ public class EventBO {
                 String[] eventData = line.split(",");
                 if (eventData.length == 3) {
                     Event event = new Event(eventData[0], Integer.parseInt(eventData[1]), eventData[2]);
+                    System.out.println(eventData[0] + Integer.parseInt(eventData[1]) + eventData[2]);
                     eventList.add(event);
                 }
             }

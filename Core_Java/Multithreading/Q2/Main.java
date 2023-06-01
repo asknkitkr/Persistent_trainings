@@ -1,31 +1,30 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the number of users:");
-        int users = sc.nextInt();
-
-        sc.nextLine();
+    public static void main(String[] args) throws InterruptedException, IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter the number of users: ");
+        int users = Integer.parseInt(br.readLine());
 
         ArrayList<User> userList = new ArrayList<>();
         for (int i = 0; i < users; i++) {
             System.out.println("Enter the details of user " + (i + 1));
-            String userDetails = sc.nextLine();
-            String[] uDetails = userDetails.split(",");
-            User user = new User(uDetails[0], uDetails[1], uDetails[2], uDetails[3]);
+            String userDetails = br.readLine().trim();
+            String[] ud = userDetails.split(",");
+            User user = new User(ud[0], ud[1], ud[2], ud[3]);
             userList.add(user);
         }
 
         System.out.println("Enter the number of cities:");
-        int noOfCities = sc.nextInt();
-        sc.nextLine();
+        int noc = Integer.parseInt(br.readLine());
 
         ArrayList<CityCount> cityCountList = new ArrayList<>();
-        for (int i = 0; i < noOfCities; i++) {
+        for (int i = 0; i < noc; i++) {
             System.out.println("Enter the name of city " + (i + 1));
-            String cityName = sc.nextLine();
+            String cityName = br.readLine();
             CityCount cityCount = new CityCount(cityName, userList);
             cityCountList.add(cityCount);
             cityCount.start();
@@ -35,7 +34,5 @@ public class Main {
             c.join();
             System.out.println(c.getCity() + "--" + c.getCount());
         }
-
-        sc.close();
     }
 }

@@ -1,17 +1,16 @@
 package Multithreading.Q2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CityCount extends Thread {
     private String city;
-    private int count;
+    private Integer count;
     private List<User> userList;
 
-    public CityCount(String city, ArrayList<User> userList) {
+    public CityCount(String city, List<User> userList) {
         this.city = city;
-        this.userList = userList;
         this.count = 0;
+        this.userList = userList;
     }
 
     public String getCity() {
@@ -22,11 +21,11 @@ public class CityCount extends Thread {
         this.city = city;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
@@ -34,17 +33,20 @@ public class CityCount extends Thread {
         return userList;
     }
 
-    public void setUserList(ArrayList<User> userList) {
+    public void setUserList(List<User> userList) {
         this.userList = userList;
     }
 
     @Override
     public void run() {
-        for (User user : userList) {
-            if (user.getCity().equals(city)) {
-                count++;
+        try {
+            for (User user : userList) {
+                if (user.getCity().equalsIgnoreCase(city)) {
+                    count++;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Class_Packaging/Class_Packaging.iml" filepath="$PROJECT_DIR$/Class_Packaging/Class_Packaging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Collections_and_Maps/Collections_and_Maps.iml" filepath="$PROJECT_DIR$/Collections_and_Maps/Collections_and_Maps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Core_Java.iml" filepath="$PROJECT_DIR$/Core_Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/JDBC.iml" filepath="$PROJECT_DIR$/JDBC/JDBC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Multithreading/Multithreading.iml" filepath="$PROJECT_DIR$/Multithreading/Multithreading.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Object_Oriented_Programming/Object_Oriented_Programming.iml" filepath="$PROJECT_DIR$/Object_Oriented_Programming/Object_Oriented_Programming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Streams_and_Files/Streams_and_Files.iml" filepath="$PROJECT_DIR$/Streams_and_Files/Streams_and_Files.iml" />
+    </modules>
+  </component>
+</project>

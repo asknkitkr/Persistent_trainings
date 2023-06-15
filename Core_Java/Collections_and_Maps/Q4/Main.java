@@ -1,46 +1,48 @@
-package Collections_and_Maps.Q4;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Set<User> set = new HashSet<>();
         System.out.println("Enter number of users:");
-        int n = Integer.parseInt(br.readLine().trim());
-        Set<User> users = new HashSet<>();
-        for (int i = 1; i <= n; i++) {
-            System.out.println("Enter details of user" + i);
+        Integer n = Integer.parseInt(br.readLine());
+        for (int i = 0, index = 1; i < n; i++) {
+            System.out.println("Enter details of user" + index++);
             System.out.println("Username:");
-            String username = br.readLine().trim();
+            String username = br.readLine();
             System.out.println("Bank name:");
-            String bankname = br.readLine().trim();
-            users.add(new User(username, bankname));
+            String bankname = br.readLine();
+            User user = new User(username, bankname);
+            set.add(user);
         }
-
-        List<User> userList = new ArrayList<>();
+        ArrayList<User> list1 = new ArrayList<>(set);
+        ArrayList<User> list2 = new ArrayList<>();
+        Collections.sort(list1);
         System.out.println("Enter username(Expire in one month) seperated by comma");
-        String[] input = br.readLine().split(",");
-        for (String username : input) {
-            userList.add(new User(username.trim(), null));
-        }
-
-        users.retainAll(new HashSet<>(userList));
-
+        String things[] = br.readLine().split(",");
         System.out.println("Users going to expire within a month");
-        int count = 1;
-        for (User user : userList) {
-            if (!users.contains(user)) {
-                System.out.println("User " + count);
-                System.out.println("User Name = " + user.getUsername());
-                System.out.println("Bank Name = " + user.getBankname());
-                count++;
+        for (String i : things) {
+            User u = new User(i, null);
+            list2.add(u);
+        }
+        int index = 1;
+        for (User i : list1) {
+            for (User j : list2) {
+                if (i.equals(j)) {
+                    System.out.println("User " + index++);
+                    System.out.println("User Name =" + i.getUsername());
+                    System.out.println("Bank Name =" + i.getBankname());
+                }
             }
         }
+        br.close();
+
     }
+
 }

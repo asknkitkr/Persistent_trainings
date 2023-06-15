@@ -1,5 +1,3 @@
-package Collections_and_Maps.Q4;
-
 public class User implements Comparable<User> {
     private String username;
     private String bankname;
@@ -8,7 +6,6 @@ public class User implements Comparable<User> {
     }
 
     public User(String username, String bankname) {
-        super();
         this.username = username;
         this.bankname = bankname;
     }
@@ -30,29 +27,11 @@ public class User implements Comparable<User> {
     }
 
     @Override
-    public int hashCode() {
-        return username.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        User other = (User) obj;
-        if (username == null) {
-            if (other.username != null)
-                return false;
-        } else if (!username.equals(other.username))
-            return false;
-        return true;
-    }
-
-    @Override
     public int compareTo(User o) {
-        return this.username.compareTo(o.username);
+        return this.getUsername().compareTo(o.getUsername());
+    }
+
+    public boolean equals(User o) {
+        return this.getUsername().equals(o.getUsername());
     }
 }

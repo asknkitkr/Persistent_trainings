@@ -1,47 +1,33 @@
-package Core_Java.Streams_and_Files.Q3;
-
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 public class EventBO {
+    // fill your code here
+    public List<Event> readFromFile(BufferedReader br) throws Exception {
+        List<Event> a = new ArrayList<Event>();
 
-    public List<Event> readFromFile(BufferedReader br) {
-        List<Event> eventList = new ArrayList<>();
-
-        try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] eventData = line.split(",");
-                if (eventData.length == 3) {
-                    Event event = new Event(eventData[0], Integer.parseInt(eventData[1]), eventData[2]);
-                    System.out.println(eventData[0] + Integer.parseInt(eventData[1]) + eventData[2]);
-                    eventList.add(event);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        String input = br.readLine();
+        while (input != null) {
+            String[] data = input.split(",");
+            if (data.length != 3)
+                break;
+            a.add(new Event(data[0], Integer.parseInt(data[1]), data[2]));
+            input = br.readLine();
         }
-        return eventList;
+        return a;
     }
 
-    public void writeFile(List<Event> eventList, FileWriter fr) {
-        Set<String> ownerSet = new HashSet<>();
-        try {
-            for (Event event : eventList) {
-                if (!ownerSet.contains(event.getOwnerName())) {
-                    ownerSet.add(event.getOwnerName());
-                    fr.write(event.getEventName() + "," + event.getAttendeesCount() + "\n");
-                }
-                fr.flush();
-                fr.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    void writeFile(List<Event> eventList, FileWriter fr) throws Exception {
+        BufferedWriter bw = new BufferedWriter(fr);
+        HashSet<String> hs = new HashSet<>();
+        for (Event x : eventList) {
+            if (hs.contains(x.getOwnerName()))
+                continue;
+            hs.add(x.getOwnerName());
+            String data = x.getEventName() + "," + x.getAttendeesCount() + "," + x.getOwnerName();
+            bw.write(data, 0, data.length());
+            bw.newLine();
         }
+        bw.flush();
     }
 }

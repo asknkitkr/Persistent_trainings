@@ -1,10 +1,22 @@
-package Core_Java.Collections_and_Maps.Q5;
+import java.util.ArrayList;
 
 public class User {
     private String name;
     private String contactNumber;
     private String userName;
     private String email;
+
+    public User() {
+        super();
+    }
+
+    public User(String name, String contactNumber, String userName, String email) {
+        super();
+        this.name = name;
+        this.contactNumber = contactNumber;
+        this.userName = userName;
+        this.email = email;
+    }
 
     public String getName() {
         return name;
@@ -38,17 +50,11 @@ public class User {
         this.email = email;
     }
 
-    public User(String name, String contactNumber, String userName, String email) {
-        this.name = name;
-        this.contactNumber = contactNumber;
-        this.userName = userName;
-        this.email = email;
-    }
-
-    public User() {
-    }
-
-    public void display() {
-        System.out.printf("%-20s%-20s%-20s%-20s\n", name, contactNumber, userName, email);
+    public void display(ArrayList<User> list) {
+        System.out.printf("%-20s%-20s%-20s%-20s\n", "Name", "Contact Number", "Username", "Email");
+        for (User i : list) {
+            System.out.printf("%-20s%-20s%-20s%-20s\n",
+                    i.getName(), i.getContactNumber(), i.getUserName(), i.getEmail());
+        }
     }
 }

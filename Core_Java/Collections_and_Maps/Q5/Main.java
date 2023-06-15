@@ -1,36 +1,30 @@
-package Core_Java.Collections_and_Maps.Q5;
-
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        UserBO userBo = new UserBO();
+        UserBO userList = UserBO.getList();
         System.out.println("Enter the number of User details to be added");
-        int n = Integer.parseInt(sc.nextLine().trim());
-        UserBO userList = new UserBO();
+        int n = Integer.parseInt(br.readLine());
+        for (int i = 1; i <= n; i++) {
+            System.out.println("Enter the user " + i + " detail in csv format");
+            String things[] = br.readLine().split(",");
+            User user = new User(things[0], things[1], things[2], things[3]);
+            userBo.add(user);
 
-        for (int i = 0; i < n; i++) {
-            System.out.println("Enter the user " + (i + 1) + " detail in csv format");
-            String[] details = sc.nextLine().split(",");
-            userList.addAllUsers(new User(details[0], details[1], details[2], details[3]));
         }
-
-        System.out.printf("%-20s%-20s%-20s%-20s\n", "Name", "Contact Number", "Username", "Email");
-        for (User user : userList) {
-            user.display();
-        }
-
+        userList.addAll(userBo);
+        User u = new User();
+        u.display(userList);
         System.out.println("Enter the range to be removed from array list");
-        int n1 = sc.nextInt();
-        int n2 = sc.nextInt();
-        sc.nextLine();
-        userList.removeUser(n1, n2);
-
-        System.out.printf("%-20s%-20s%-20s%-20s\n", "Name", "Contact Number", "Username", "Email");
-        for (User user : userList) {
-            user.display();
-        }
-
-        sc.close();
+        int startPoint = Integer.parseInt(br.readLine());
+        int endPoint = Integer.parseInt(br.readLine());
+        userList.removeUser(startPoint, endPoint);
+        u.display(userList);
+        br.close();
     }
+
 }
